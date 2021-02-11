@@ -53,7 +53,7 @@ class Yson:
 				self.tree(self.root,n)
 				if self.log==True:
 					txt.write(' '*n)
-				print(round(100*offset/float(len(self.input)),3),'procent')
+				print round(100*offset/float(len(self.input)),3),'procent'
 				
 			file.close()	
 			
@@ -103,9 +103,9 @@ class Yson:
 							
 					#if a.count(':')>1:
 		if type=='f':
-			list=list(map(float,A))
+			list=map(float,A)
 		if type=='i':
-			list=list(map(int,A))
+			list=map(int,A)
 		if type=='s':
 			list=A
 		return list	
@@ -601,7 +601,7 @@ def getAnimation(ys,A,n):
 					if Name=='"translate"':
 						if name in boneIndeksList:
 							name=boneIndeksList[name]
-							if name not in list(boneList.keys()):
+							if name not in boneList.keys():
 								bone=ActionBone()
 								action.boneList.append(bone)
 								bone.name=name
@@ -682,7 +682,7 @@ def getAnimation(ys,A,n):
 					if Name=='"translate"':
 						if name in boneIndeksList:
 							name=boneIndeksList[name]
-							if name not in list(boneList.keys()):
+							if name not in boneList.keys():
 								bone=ActionBone()
 								action.boneList.append(bone)
 								bone.name=name
@@ -762,7 +762,7 @@ def getAnimation(ys,A,n):
 					name=getSplitName(TargetName,'_',-1)
 					if name in boneIndeksList:
 						name=boneIndeksList[name]
-						if name not in list(boneList.keys()):
+						if name not in boneList.keys():
 							bone=ActionBone()
 							action.boneList.append(bone)
 							bone.name=name
@@ -843,7 +843,7 @@ def getAnimation(ys,A,n):
 					name=getSplitName(TargetName,'_',-1)
 					if name in boneIndeksList:
 						name=boneIndeksList[name]
-						if name not in list(boneList.keys()):
+						if name not in boneList.keys():
 							bone=ActionBone()
 							action.boneList.append(bone)
 							bone.name=name
@@ -919,7 +919,7 @@ def getAnimation(ys,A,n):
 								file.close()
 				
 			if bone:	
-				print(name,bone.name)
+				print name,bone.name
 				
 	action.draw()
 	action.setContext()	
@@ -946,7 +946,7 @@ def getPrimitiveSetList(ys,PrimitiveSetList,n):
 						ItemSize=ys.getValue(values,'"ItemSize"','i')
 						Uint32Array=ys.get(Indices[0],'"Uint32Array"')
 						type="Uint32Array"
-						print("DrawElementsUInt",type)
+						print "DrawElementsUInt",type
 						if Uint32Array:
 							values=ys.values(Uint32Array[0].data,':')
 							Size=ys.getValue(values,'"Size"','i')
@@ -964,7 +964,7 @@ def getPrimitiveSetList(ys,PrimitiveSetList,n):
 									indiceArray.append([indiceList,mode])
 									file.close()
 				else:
-					print('LINES')
+					print 'LINES'
 					
 			if '"DrawElementsUShort"' in b.header:		
 				values=ys.values(b.data,':')
@@ -981,14 +981,14 @@ def getPrimitiveSetList(ys,PrimitiveSetList,n):
 						ItemSize=ys.getValue(values,'"ItemSize"','i')
 						Uint16Array=ys.get(Indices[0],'"Uint16Array"')
 						type="Uint16Array"
-						print("DrawElementsUShort",type)
+						print "DrawElementsUShort",type
 						if Uint16Array:
 							values=ys.values(Uint16Array[0].data,':')
 							Size=ys.getValue(values,'"Size"','i')
 							Offset=ys.getValue(values,'"Offset"','i')
 							Encoding=ys.getValue(values,'"Encoding"','""')
 							write(log,['Indice:','mode:',mode,type,'Size:',Size,'Offset:',Offset,'Encoding:',Encoding,'magic:',magic],n)
-							print(Encoding)
+							print Encoding
 							if Encoding=='varint':
 								path=os.path.dirname(ys.filename)+os.sep+"model_file.bin.gz.txt"
 								if os.path.exists(path)==False:path=os.path.dirname(ys.filename)+os.sep+"model_file.bin"
@@ -1011,7 +1011,7 @@ def getPrimitiveSetList(ys,PrimitiveSetList,n):
 									indiceArray.append([indiceList,mode])
 									file.close()
 				else:
-					print('LINES')
+					print 'LINES'
 				
 			if '"DrawElementsUByte"' in b.header:			
 				values=ys.values(b.data,':')
@@ -1028,7 +1028,7 @@ def getPrimitiveSetList(ys,PrimitiveSetList,n):
 						ItemSize=ys.getValue(values,'"ItemSize"','i')
 						Uint8Array=ys.get(Indices[0],'"Uint8Array"')
 						type="Uint8Array"
-						print("DrawElementsUByte",type)
+						print "DrawElementsUByte",type
 						if Uint8Array:
 							values=ys.values(Uint8Array[0].data,':')
 							Size=ys.getValue(values,'"Size"','i')
@@ -1045,7 +1045,7 @@ def getPrimitiveSetList(ys,PrimitiveSetList,n):
 								indiceArray.append([indiceList,mode])
 								file.close()
 				else:
-					print('LINES')
+					print 'LINES'
 				
 	return indiceArray
 								
@@ -1074,7 +1074,7 @@ def getVertexAttributeList(ys,VertexAttributeList,n):
 			Int32Array=ys.get(b,'"Int32Array"')
 			if Int32Array:
 				type='Int32Array'
-				print(mode,type)
+				print mode,type
 				values=ys.values(Int32Array[0].data,':')
 				Size=ys.getValue(values,'"Size"','i')
 				Offset=ys.getValue(values,'"Offset"','i')
@@ -1093,7 +1093,7 @@ def getVertexAttributeList(ys,VertexAttributeList,n):
 			Float32Array=ys.get(b,'"Float32Array"')
 			if Float32Array:
 				type='Float32Array'
-				print(mode,type)
+				print mode,type
 				values=ys.values(Float32Array[0].data,':')
 				Size=ys.getValue(values,'"Size"','i')
 				Offset=ys.getValue(values,'"Offset"','i')
@@ -1130,7 +1130,7 @@ def getVertexAttributeList(ys,VertexAttributeList,n):
 				Int32Array=ys.get(b,'"Int32Array"')
 				if Int32Array:
 					type='Int32Array'
-					print(mode,type)
+					print mode,type
 					values=ys.values(Int32Array[0].data,':')
 					Size=ys.getValue(values,'"Size"','i')
 					Offset=ys.getValue(values,'"Offset"','i')
@@ -1149,7 +1149,7 @@ def getVertexAttributeList(ys,VertexAttributeList,n):
 				Float32Array=ys.get(b,'"Float32Array"')
 				if Float32Array:
 					type='Float32Array'
-					print(mode,type)
+					print mode,type
 					values=ys.values(Float32Array[0].data,':')
 					Size=ys.getValue(values,'"Size"','i')
 					Offset=ys.getValue(values,'"Offset"','i')
@@ -1173,7 +1173,7 @@ def getVertexAttributeList(ys,VertexAttributeList,n):
 	return	vertexArray,texArray							
 			
 def getRigGeometry(ys,parent,n):
-	print('#'*50,'RigGeometry')
+	print '#'*50,'RigGeometry'
 	n+=4
 	BoneMap=[0]*1000
 	bones=[]
@@ -1312,7 +1312,7 @@ def getRigGeometry(ys,parent,n):
 		mesh.skinWeightList=weights
 	if len(indiceArray)>0:
 		for [indices,mode] in indiceArray:
-			print(mode,len(indices))	
+			print mode,len(indices)	
 			mat=Mat()
 			mesh.matList.append(mat)
 			mat.IDStart=len(mesh.indiceList)
@@ -1379,7 +1379,7 @@ def decodeQuantize(input,s,a,itemsize):
 		
 			
 def getGeometry(ys,parent,n):
-	print('#'*50,'Geometry')
+	print '#'*50,'Geometry'
 	n+=4
 	mode=None
 	indiceArray=[]
@@ -1413,7 +1413,7 @@ def getGeometry(ys,parent,n):
 	mesh=Mesh()
 	if len(indiceArray)>0:
 		for [indices,mode] in indiceArray:
-			print(mode,len(indices))	
+			print mode,len(indices)	
 			mat=Mat()
 			mesh.matList.append(mat)
 			mat.IDStart=len(mesh.indiceList)
@@ -1664,7 +1664,7 @@ def bindPose(bindSkeleton,poseSkeleton,meshObject):
 			for skin in skinList:
 				bone=skin[0]							
 				weight=skin[1]	
-				if bone in list(bindBones.keys()) and bone in list(poseBones.keys()):	
+				if bone in bindBones.keys() and bone in poseBones.keys():	
 					matA=bindBones[bone].matrix['ARMATURESPACE']*bindSkeleton.matrixWorld
 					matB=poseBones[bone].matrix['ARMATURESPACE']*poseSkeleton.matrixWorld
 					vector+=vco*matA.invert()*matB*weight
@@ -1752,9 +1752,9 @@ def Parser():
 	global log
 	log=open('log.txt','w')
 	filename=input.filename
-	print()
-	print(filename)
-	print()
+	print
+	print filename
+	print
 	os.system("cls")
 	ext=filename.split('.')[-1].lower()
 	osgParser(filename)	

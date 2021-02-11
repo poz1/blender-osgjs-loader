@@ -1,5 +1,5 @@
 
-from .myFunction import *
+from myFunction import *
 import Blender
 from Blender.Mathutils import *
 import bpy
@@ -102,11 +102,11 @@ class Skeleton:
 		objectID=SceneIDList().szkieletID
 		if not self.name:self.name='szkielet-'+str(objectID)
 		if self.WARNING==True:
-			print('INPUT:')
-			print('class<Skeleton>.name:',self.name)
-			print('class<Skeleton>.boneList:',len(self.boneList))
-			print('class<Skeleton>.ARMATURESPACE:',self.ARMATURESPACE)
-			print('class<Skeleton>.BONESPACE:',self.BONESPACE)
+			print 'INPUT:'
+			print 'class<Skeleton>.name:',self.name
+			print 'class<Skeleton>.boneList:',len(self.boneList)
+			print 'class<Skeleton>.ARMATURESPACE:',self.ARMATURESPACE
+			print 'class<Skeleton>.BONESPACE:',self.BONESPACE
 			
 		if self.debug is not None:
 			self.debugFile=open(self.debug+'.skeleton','w')
@@ -129,7 +129,7 @@ class Skeleton:
 						self.object.makeParentDeform([object],1,0)
 			if self.IK==True:
 				self.armature.drawType=Blender.Armature.OCTAHEDRON
-				for key in list(self.armature.bones.keys()):
+				for key in self.armature.bones.keys():
 					bone=self.armature.bones[key]
 					#print bone
 					children=bone.children
@@ -140,7 +140,7 @@ class Skeleton:
 						if ebone.tail!=children[0].head['ARMATURESPACE']:
 							ebone.tail=children[0].head['ARMATURESPACE']
 						self.armature.update()	
-				for key in list(self.armature.bones.keys()):
+				for key in self.armature.bones.keys():
 					bone=self.armature.bones[key]
 					#print bone
 					children=bone.children
@@ -152,19 +152,19 @@ class Skeleton:
 					self.armature.autoIK=True
 			return 1		
 		else:
-			print()
-			print('=======PROBLEMY===========')
+			print
+			print '=======PROBLEMY==========='
 			if self.parentTestFlag is True:
-				print('WARNING:znaleziono kosci z wiecej niz jednym rodzicem')
+				print 'WARNING:znaleziono kosci z wiecej niz jednym rodzicem'
 				for bone in self.parentProblemList:
-					print(bone.name,len(bone.parentList),'rodzic')
+					print bone.name,len(bone.parentList),'rodzic'
 					for parent in bone.parentList:
-						print(' '*4,parent.name)
+						print ' '*4,parent.name
 			if self.nameTestFlag is True:
-				print('WARNING:znaleziono kosci o za dlugiej nazwie')
+				print 'WARNING:znaleziono kosci o za dlugiej nazwie'
 				for bone in self.nameProblemList:
-					print(bone.name,len(bone.name),'liter')
-			print()		
+					print bone.name,len(bone.name),'liter'
+			print		
 			return 0
 					
 		if self.debug is not None:
@@ -175,7 +175,7 @@ class Skeleton:
 	def create_bones(self): 
 		self.armature.makeEditable()
 		boneList=[]
-		for bone in list(self.armature.bones.values()):
+		for bone in self.armature.bones.values():
 			if bone.name not in boneList:
 				boneList.append(bone.name)
 		for boneID in range(len(self.boneList)):
@@ -216,7 +216,7 @@ class Skeleton:
 					
 			else:
 				if self.WARNING==True:
-					print('WARNING: no parent for bone',name)
+					print 'WARNING: no parent for bone',name
 		self.armature.update()
 		
 		
@@ -271,7 +271,7 @@ class Skeleton:
 						
 				else:
 					if self.WARNING==True:
-						print('ARMATUREPACE or BONESPACE ?')	
+						print 'ARMATUREPACE or BONESPACE ?'	
 			elif rotMatrix is not None and posMatrix is not None:
 				if self.ARMATURESPACE==True:
 					rotMatrix=roundMatrix(rotMatrix,4)
@@ -297,10 +297,10 @@ class Skeleton:
 						bone.tail = bone.head + self.param * bvec 
 				else:
 					if self.WARNING==True:
-						print('ARMATUREPACE or BONESPACE ?')	
+						print 'ARMATUREPACE or BONESPACE ?'	
 			else:
 				if self.WARNING==True:
-					print('WARNINIG: rotMatrix or posMatrix or matrix is None')
+					print 'WARNINIG: rotMatrix or posMatrix or matrix is None'
 							
 		self.armature.update()
 		Blender.Window.RedrawAll()
@@ -320,7 +320,7 @@ class Skeleton:
 				self.armature = self.object.getData()
 				if self.DEL==True:  
 					self.armature.makeEditable()
-					for bone in list(self.armature.bones.values()):
+					for bone in self.armature.bones.values():
 						del self.armature.bones[bone.name]
 					self.armature.update()
 		if self.object==None: 
@@ -365,10 +365,10 @@ class Node():
 					lineSplit=line.split(':')
 					if '"' in lineSplit[0]:
 						key=lineSplit[0].split('"')[1]
-						print('key',key)
+						print 'key',key
 					if '"' in lineSplit[1]:
 						data=lineSplit[1].split('"')[1]
-						print('data',data)
+						print 'data',data
 						
 						
 			

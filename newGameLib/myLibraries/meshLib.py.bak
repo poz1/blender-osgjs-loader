@@ -1,8 +1,8 @@
 import bpy
 import Blender
 from Blender.Mathutils import *
-from .myFunction import *
-from .commandLib import *
+from myFunction import *
+from commandLib import *
 import random
 import os
 #from bump_to_normal import *
@@ -400,7 +400,7 @@ class Mesh():
 		
 	def addfaceUV(self,blenderMesh,mesh):
 		if self.WARNING==True:
-			print('WARNING: blenderMesh.faces:',len(blenderMesh.faces))
+			print 'WARNING: blenderMesh.faces:',len(blenderMesh.faces)
 		if len(blenderMesh.faces)>0:
 			blenderMesh.faceUV = 1
 			if len(mesh.vertUVList)>0:
@@ -540,8 +540,8 @@ class Mesh():
 					self.indicesToTriangleStrips(self.indiceList,0)
 				else:
 					if self.WARNING==True:
-						print('WARNING: class<Mesh>.TRIANGLE:',self.TRIANGLE) 
-						print('WARNING: class<Mesh>.TRISTRIP:',self.TRISTRIP)
+						print 'WARNING: class<Mesh>.TRIANGLE:',self.TRIANGLE 
+						print 'WARNING: class<Mesh>.TRISTRIP:',self.TRISTRIP
 				
 					
 		else:
@@ -602,7 +602,7 @@ class Mesh():
 		for object in scene.objects:
 			if object.name==skeletonName:
 				bones=object.getData().bones
-				if boneName in list(bones.keys()):
+				if boneName in bones.keys():
 					matrix=bones[boneName].matrix['ARMATURESPACE']
 					#self.object.setMatrix(matrix*self.object.matrixWorld)
 					#print boneName,matrix
@@ -628,7 +628,7 @@ class Mesh():
 		
 		
 		try:self.addSkinWithIndiceList(blendMesh,mesh)
-		except:print('WARNING:self.addSkinWithIndiceList:',mesh.name)
+		except:print 'WARNING:self.addSkinWithIndiceList:',mesh.name
 		
 		
 		Blender.Window.RedrawAll()
@@ -703,14 +703,14 @@ class Mesh():
 						self.addSkinIDList()		
 						self.addSkinWithIndiceList(self.mesh,self)
 					#except:
-					except:print('WARNING:self.addSkinWithIndiceList:',self.mesh.name)
+					except:print 'WARNING:self.addSkinWithIndiceList:',self.mesh.name
 			if len(self.skinGroupList)>0 and len(self.skinWeightList)>0:	
 				if len(self.skinGroupList)==len(self.skinWeightList)>0:	
 					#print 'addSkinWithGroupList'
 					try:
 						self.addSkinIDList()		
 						self.addSkinWithGroupList(self.mesh,self)
-					except:print('WARNING:self.addSkinWithGroupList:',self.mesh.name)
+					except:print 'WARNING:self.addSkinWithGroupList:',self.mesh.name
 			Blender.Window.RedrawAll()		
 			
 			
@@ -772,18 +772,18 @@ class Mesh():
 				if len(self.skinIndiceList)>0 and len(self.skinWeightList)>0:	
 					if len(self.skinIDList)==0:				
 						try:self.addSkinIDList()		
-						except:print('WARNING:self.addSkinIDList:',self.name)
+						except:print 'WARNING:self.addSkinIDList:',self.name
 			for i,mesh in enumerate(meshList):
 				#print mesh.IDList.keys()
-				for vID in list(mesh.IDList.keys()):
+				for vID in mesh.IDList.keys():
 					mesh.vertPosList[mesh.IDList[vID]]=self.vertPosList[vID]
 				if len(self.vertUVList)>0:
-					for vID in list(mesh.IDList.keys()):
+					for vID in mesh.IDList.keys():
 						mesh.vertUVList[mesh.IDList[vID]]=self.vertUVList[vID]
 				if len(self.skinList)>0:
 					if len(self.skinIndiceList)>0 and len(self.skinWeightList)>0:	
 						if len(self.skinIDList)>0:
-							for vID in list(mesh.IDList.keys()):	
+							for vID in mesh.IDList.keys():	
 								mesh.skinWeightList[mesh.IDList[vID]]=self.skinWeightList[vID]
 								mesh.skinIndiceList[mesh.IDList[vID]]=self.skinIndiceList[vID]
 								mesh.skinIDList[mesh.IDList[vID]]=self.skinIDList[vID]
@@ -791,7 +791,7 @@ class Mesh():
 							#mat=self.matList[i]]
 							#if mat.IDStart is not None and mat.IDCount is not None:
 							#	for 
-							print('self.skinIDList is missing')
+							print 'self.skinIDList is missing'
 					
 			for meshID in range(len(meshList)):
 				mesh=meshList[meshID]

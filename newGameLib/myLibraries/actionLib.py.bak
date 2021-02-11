@@ -32,7 +32,7 @@ class Action:
 			scene = bpy.data.scenes.active
 			for object in scene.objects:
 				if object.name==self.skeleton:
-					self.boneNameList=list(object.getData().bones.keys())
+					self.boneNameList=object.getData().bones.keys()
 		
 		
 	def setContext(self):
@@ -54,7 +54,7 @@ class Action:
 					if object.name==self.skeleton:				
 						skeleton = object
 		else:
-			print('WARNING: no armature')
+			print 'WARNING: no armature'
 		if skeleton is not None:			
 			armature=skeleton.getData()
 			pose = skeleton.getPose()
@@ -249,9 +249,9 @@ class Action:
 						#pose.update()
 				#print timeList	
 			else:
-				print('WARNING: missing BONESORT or FRAMESORT')
+				print 'WARNING: missing BONESORT or FRAMESORT'
 			#print timeList	
 			if len(timeList)>0:
-				print(max(list(map(int,timeList))))	
-				self.frameCount=max(list(map(int,timeList)))
+				print max(map(int,timeList))	
+				self.frameCount=max(map(int,timeList))
 						

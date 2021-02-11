@@ -9,7 +9,7 @@ from math import *
 
 def setBoneMatrix(object,skeletonObject,boneName):
 	bones=skeletonObject.getData().bones
-	if boneName in list(bones.keys()):
+	if boneName in bones.keys():
 		matrix=bones[boneName].matrix['ARMATURESPACE']
 		object.setMatrix(matrix)
 
@@ -26,7 +26,7 @@ def removeMaterials():
 								del nme.materials[i]
 								i += 1
 								nme.update()
-						print(mats)
+						print mats
 
 """
 
@@ -227,9 +227,9 @@ def write(input,list,pad):
 	
 def safe(count):
 	if count<1000000:
-		return list(range(count))
+		return range(count)
 	else:
-		print('WARNING:too long:',count)
+		print 'WARNING:too long:',count
 		return [0]
 	
 	
@@ -289,7 +289,7 @@ class Input(object):
 			self.output=flagList
 			self.returnList=self.flagList.returnList
 			self.returnKey=self.flagList.returnKey
-		if type(flagList)==bytes:
+		if type(flagList)==types.StringType:
 			self.type='string'
 			self.filename=flagList
 			
@@ -309,7 +309,7 @@ def Float255(data):
 
 
 def pm(message,n):
-	print(' '*4*n,message)
+	print ' '*4*n,message
 
 	
 	
@@ -329,7 +329,7 @@ class Bms(object):
 		if self.bms is not None:
 			self.bms=bmsScriptDir+os.sep+self.bms
 			commandline = bmsExe +self.command+self.bms+ ' ' + self.input + ' '+self.output
-			print(commandline)
+			print commandline
 			os.system(commandline)
 			
 		
@@ -484,7 +484,7 @@ def decrypt_string(string):
 	FF to get the actual character. Strings are null-terminated.'''
 	#string =B(count )
 	inverted = ""
-	print(len(string))
+	print len(string)
 	#for m in range(len(string)-1):
 	for m in string:
 		#pass
