@@ -1,6 +1,6 @@
 import bpy
-import Blender
-from Blender.Mathutils import *
+import mathutils
+from math import *
 from .myFunction import *
 from .commandLib import *
 import random
@@ -129,8 +129,6 @@ def setBox1(box,meshList):
 			x,y,z=mesh.vertPosList[n]
 			mesh.vertPosList[n]=[trX+x*skX,trY+y*skY,trZ+z*skZ]
 		#mesh.draw()	
-
-
 
 def bindPose(bindSkeleton,poseSkeleton,meshObject):
 		#print 'BINDPOSE'

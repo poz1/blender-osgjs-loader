@@ -3,9 +3,7 @@ import Blender
 	
 blendDir=os.path.dirname(Blender.Get('filename'))
 toolsDir=blendDir+os.sep+"newGameLib"+os.sep+"tools"
-
-
-									
+						
 class Cmd:
 	def __init__(self):
 		self.type=None

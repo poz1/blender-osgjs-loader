@@ -1,6 +1,4 @@
-import bpy
-import Blender,os	
-from Blender.Mathutils import *
+import bpy ,os	
 import types
 from Blender.Draw import *
 import math
