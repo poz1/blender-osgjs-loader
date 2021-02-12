@@ -668,11 +668,12 @@ class Osgjs:
         # bindskeleton = Skeleton()
         # bindskeleton.NICE = True
         # bindskeleton.ARMATURESPACE = True
-        ys = Yson()
+        ys = yson.Yson()
         ys.log = True
         ys.filename = filename
         ys.parse()
 
+        print(ys)
         # firstmatrix = Matrix4x4([1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1])
 
         # n = 0
@@ -727,3 +728,6 @@ class Osgjs:
         # if Animations:
         #     for animation in Animations:
         #         getAnimation(ys, animation, n)
+
+
+osgj = Osgjs('')

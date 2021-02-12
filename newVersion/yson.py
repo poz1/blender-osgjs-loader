@@ -1,22 +1,23 @@
-import node
+from node import Node
 
 class Yson:
     def __init__(self):
         self.input = None
         self.filename = None
         self.root = Node()
-        self.log = False
+        self.log = True
 
     def parse(self):
         global offset, string, txt
+        print(self.filename)
+
         if self.filename is not None:
-            file = open(self.filename, 'rb')
+            file = open(self.filename, 'r')
             self.input = file.read().replace('\x20', '').replace('\x0A', '')
 
             line = self.input
             if self.log == True:
-                txt = open(self.filename+'.ys', 'w')
-
+                txt = open(self.filename + '.ys', 'w')
             if line is not None and len(line) > 0:
                 offset = 0
                 n = 0
