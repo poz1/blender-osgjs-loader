@@ -1,3 +1,6 @@
+import math
+import mathutils
+import bpy
 
 def isQuat(quat):
         sum = quat[0]**2+quat[1]**2+quat[2]**2+quat[3]**2
@@ -17,7 +20,7 @@ def quatDecompress3(s0, s1, s2):
         f0 = 1.41421*(s0-0x3FFF)/0x7FFF
         f1 = 1.41421*(s1-0x3FFF)/0x7FFF
         f2 = 1.41421*(s2-0x3FFF)/0x7FFF;
-        f3 = sqrt(1.0-(f0*f0+f1*f1+f2*f2))
+        f3 = math.sqrt(1.0-(f0*f0+f1*f1+f2*f2))
         # print AxisFlag
         if AxisFlag == 3:
             x = f2
@@ -46,7 +49,7 @@ def quatDecompress(s0, s1, s2):
         f0 = 1.41421*(s0-0x3FFF)/0x7FFF
         f1 = 1.41421*(s1-0x3FFF)/0x7FFF
         f2 = 1.41421*(s2-0x3FFF)/0x7FFF;
-        f3 = sqrt(1.0-(f0*f0+f1*f1+f2*f2))
+        f3 = math.sqrt(1.0-(f0*f0+f1*f1+f2*f2))
         # print AxisFlag
         if AxisFlag == 3:
             x = f2
@@ -62,54 +65,55 @@ def quatDecompress(s0, s1, s2):
         return x, y, z, w
 
 def QuatMatrix(quat):
-        return Quaternion(quat[3], quat[0],quat[1],quat[2]).toMatrix()	
+        return mathutils.Quaternion(quat[3], quat[0],quat[1],quat[2]).toMatrix()	
 
 def VectorMatrix(vector):
-        return TranslationMatrix(Vector(vector))
+    #or mathutils.Matrix.Translation
+        return mathutils.Matrix.Translation(mathutils.Vector(vector))
 
 
 def roundVector(vec, dec=17):
         fvec = []
         for v in vec:
             fvec.append(round(v, dec))
-        return Vector(fvec)
+        return mathutils.Vector(fvec)
 
 
 def roundMatrix(mat, dec=17):
         fmat = []
         for row in mat:
             fmat.append(roundVector(row, dec))
-        return Matrix(*fmat)
+        return mathutils.Matrix(*fmat)
 
 def Matrix4x4(data):
-        return Matrix(data[:4],\
+        return mathutils.Matrix(data[:4],\
                         data[4:8],
                         data[8:12],
                         data[12:16])
 
 def Matrix3x3(data):
-        return Matrix(data[:3],\
+        return mathutils.Matrix(data[:3],\
                         data[3:6],
                         data[6:9])
 
 def Matrix4x3(data):
         # print data
         data = list(data)
-        return Matrix(data[:3]+[0.0],\
+        return mathutils.Matrix(data[:3]+[0.0],\
                         data[3:6]+[0.0],
                         data[6:9]+[0.0],
                         data[9:12]+[1.0])
 
 def VectorScaleMatrix(scale):
-        mat = Blender.Mathutils.Matrix(
+        mat = mathutils.Matrix(
             [1, 0, 0, 0],
-                [0, 1, 0, 0],
-                [0, 0, 1, 0],
-                [0, 0, 0, 1],
-            )
-        mat *= Blender.Mathutils.ScaleMatrix(scale[0], 4, Blender.Mathutils.Vector([1, 0, 0]))
-        mat *= Blender.Mathutils.ScaleMatrix(scale[1], 4, Blender.Mathutils.Vector([0, 1, 0]))
-        mat *= Blender.Mathutils.ScaleMatrix(scale[2], 4, Blender.Mathutils.Vector([0, 0, 1]))
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1],
+        )
+        mat *= mathutils.Matrix.Scale(scale[0], 4, mathutils.Vector([1, 0, 0]))
+        mat *= mathutils.Matrix.Scale(scale[1], 4, mathutils.Vector([0, 1, 0]))
+        mat *= mathutils.Matrix.Scale(scale[2], 4, mathutils.Vector([0, 0, 1]))
         return mat
 
 def ParseID():

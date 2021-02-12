@@ -1,4 +1,4 @@
-from .node import *
+import node
 
 class Yson:
     def __init__(self):
